@@ -12,6 +12,12 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 """
 
+with open("data.csv", "r") as file:
+    datos = file.readlines()
+
+datos = [line.replace('\n', '') for line in datos]
+datos = [line.split('\t') for line in datos]
+
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -20,9 +26,12 @@ def pregunta_01():
     214
 
     """
+    resultado = 0
 
-    return 214
+    for dato in datos:
+        resultado += int(dato[1])
 
+    return resultado
 
 def pregunta_02():
     """
@@ -39,14 +48,14 @@ def pregunta_02():
     ]
 
     """
-    return [
-        ("A", 8),
-        ("B", 7),
-        ("C", 5),
-        ("D", 6),
-        ("E", 14),
-    ]
+    resultado = []
+    buscar = ["A", "B", "C", "D", "E"]
 
+    for i in buscar:
+        conteoi = len(list(filter(lambda dato: (dato[0]==i), datos)))
+        resultado.append((i, conteoi))
+
+    return resultado
 
 def pregunta_03():
     """
@@ -63,7 +72,17 @@ def pregunta_03():
     ]
 
     """
-    return
+    resultado = []
+    buscar = ["A", "B", "C", "D", "E"]
+
+    for i in buscar:
+        listai = list(filter(lambda dato: (dato[0]==i), datos))
+        conteoi = 0
+        for numero in listai:
+            conteoi += int(numero[1])
+        resultado.append((i, conteoi))
+
+    return resultado
 
 
 def pregunta_04():
@@ -88,8 +107,14 @@ def pregunta_04():
     ]
 
     """
-    return
+    resultado = []
+    buscar = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
 
+    for i in buscar:
+        conteoi = len(list(filter(lambda dato: (dato[2][5:7]==i), datos)))
+        resultado.append((i, conteoi))
+
+    return resultado
 
 def pregunta_05():
     """
