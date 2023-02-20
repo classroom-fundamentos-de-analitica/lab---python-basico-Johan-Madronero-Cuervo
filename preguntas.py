@@ -143,12 +143,10 @@ def pregunta_05():
     buscar = list(buscar)
     buscar.sort()
 
-    print(buscar)
-
     for i in buscar:
         listai = list(filter(lambda dato: (dato[0]==i), datos))
         listai = [dato[1] for dato in listai]
-        resultado.append((i, max(listai), min(listai)))
+        resultado.append((str(i), int(max(listai)), int(min(listai))))
 
     return resultado
 
