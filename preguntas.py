@@ -49,7 +49,10 @@ def pregunta_02():
 
     """
     resultado = []
-    buscar = ["A", "B", "C", "D", "E"]
+    buscar = set(list(map(lambda dato: (str(dato[0])), datos)))
+
+    buscar = list(buscar)
+    buscar.sort()
 
     for i in buscar:
         conteoi = len(list(filter(lambda dato: (dato[0]==i), datos)))
@@ -73,7 +76,10 @@ def pregunta_03():
 
     """
     resultado = []
-    buscar = ["A", "B", "C", "D", "E"]
+    buscar = set(list(map(lambda dato: (str(dato[0])), datos)))
+
+    buscar = list(buscar)
+    buscar.sort()
 
     for i in buscar:
         listai = list(filter(lambda dato: (dato[0]==i), datos))
@@ -131,8 +137,20 @@ def pregunta_05():
     ]
 
     """
-    return
+    resultado = []
+    buscar = set(list(map(lambda dato: (str(dato[0])), datos)))
 
+    buscar = list(buscar)
+    buscar.sort()
+
+    print(buscar)
+
+    for i in buscar:
+        listai = list(filter(lambda dato: (dato[0]==i), datos))
+        listai = [dato[1] for dato in listai]
+        resultado.append((i, max(listai), min(listai)))
+
+    return resultado
 
 def pregunta_06():
     """
@@ -156,8 +174,29 @@ def pregunta_06():
     ]
 
     """
-    return
+    diccionarios = [i[4] for i in datos]
+    diccionarios = [i.split(',') for i in diccionarios]
 
+    final = []
+
+    for i in diccionarios:
+        final += i
+    
+    buscar = set(list(map(lambda dato: (str(dato[0:3])), final)))
+
+    buscar = list(buscar)
+    buscar.sort()
+
+    resultado = []
+
+    for i in buscar:
+        conteoi = list(filter(lambda dato: (dato[0:3]==i), final))
+        conteoi = list(map(lambda dato: (int(str(dato[4:]))), conteoi))
+
+        if conteoi:
+            resultado.append((i, min(conteoi), max(conteoi)))
+
+    return resultado
 
 def pregunta_07():
     """
@@ -180,8 +219,20 @@ def pregunta_07():
     ]
 
     """
-    return
 
+    respuesta = []
+
+    buscar = set(list(map(lambda dato: (int(dato[1])), datos)))
+
+    for i in buscar:
+        temp = []
+        for dato in datos:
+            if int(dato[1]) == i:
+                temp.append(str(dato[0]))
+
+        respuesta.append((i, temp))
+
+    return respuesta
 
 def pregunta_08():
     """
@@ -205,8 +256,21 @@ def pregunta_08():
     ]
 
     """
-    return
+    respuesta = []
+    buscar = set(list(map(lambda dato: (int(dato[1])), datos)))
 
+    for i in buscar:
+        temp = []
+        for dato in datos:
+            if int(dato[1]) == i:
+                temp.append(str(dato[0]))
+
+        temp = list(set(temp))
+        temp.sort()
+
+        respuesta.append((i, temp))
+
+    return respuesta
 
 def pregunta_09():
     """
@@ -228,8 +292,30 @@ def pregunta_09():
     }
 
     """
-    return
 
+    diccionarios = [i[4] for i in datos]
+    diccionarios = [i.split(',') for i in diccionarios]
+
+    final = []
+
+    for i in diccionarios:
+        final += i
+    
+    buscar = set(list(map(lambda dato: (str(dato[0:3])), final)))
+
+    buscar = list(buscar)
+    buscar.sort()
+
+    resultado = {}
+
+    for i in buscar:
+        conteoi = list(filter(lambda dato: (dato[0:3]==i), final))
+        conteoi = list(map(lambda dato: (int(str(dato[4:]))), conteoi))
+
+        if conteoi:
+            resultado[i] = len(conteoi)
+
+    return resultado
 
 def pregunta_10():
     """
@@ -249,7 +335,14 @@ def pregunta_10():
 
 
     """
-    return
+    respuesta = []
+
+    for i in datos:
+        columna4 = i[3].split(',')
+        columna5 = i[4].split(',')
+        respuesta.append((str(i[0]), len(columna4), len(columna5)))
+
+    return respuesta
 
 
 def pregunta_11():
@@ -270,7 +363,29 @@ def pregunta_11():
 
 
     """
-    return
+    diccionarios = [i[3] for i in datos]
+    diccionarios = [i.split(',') for i in diccionarios]
+
+    final = []
+
+    for i in diccionarios:
+        final += i
+    
+    buscar = set(list(map(lambda dato: (str(dato)), final)))
+
+    buscar = list(buscar)
+    buscar.sort()
+
+    resultado = {}
+
+    for i in buscar:
+        conteo = 0;
+        for j in range(len(diccionarios)):
+            if str(i) in diccionarios[j]:
+                conteo += int(datos[j][1])
+        resultado[str(i)] = int(conteo)
+
+    return resultado
 
 
 def pregunta_12():
@@ -288,4 +403,22 @@ def pregunta_12():
     }
 
     """
-    return
+    buscar = set(list(map(lambda dato: (str(dato[0])), datos)))
+
+    buscar = list(buscar)
+    buscar.sort()
+
+    resultado = {}
+
+    for i in buscar:
+        conteo = list(filter(lambda dato: (dato[0] == i), datos))
+        diccionarios = [i[4] for i in conteo]
+        diccionarios = [i.split(',') for i in diccionarios]
+        final = []
+        for j in diccionarios:
+            final += j
+        cuenta = sum(list(map(lambda dato: (int(dato[4:])), final)))
+
+        resultado[str(i)] = int(cuenta)
+
+    return(resultado)
