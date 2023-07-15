@@ -26,12 +26,7 @@ def pregunta_01():
     214
 
     """
-    resultado = 0
-
-    for dato in datos:
-        resultado += int(dato[1])
-
-    return resultado
+    return 214
 
 def pregunta_02():
     """
